@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.StudentHomeworkMapper">
+  <resultMap id="studentHomework" type="StudentHomework">
+    <id property="id" column="id"></id>
+    <result property="studentId" column="studentId"></result>
+    <result property="homeworkId" column="homeworkId"></result>
+    <result property="homeworkTitle" column="homeworkTitle"></result>
+    <result property="homeworkContent" column="homeworkContent"></result>
+    <result property="createTime" column="createTime"></result>
+    <result property="updateTime" column="updateTime"></result>
+  </resultMap>
+  <insert id="submitHomework"  parameterType="StudentHomework">
+        insert into s_student_homework(studentId,homeworkId,homeworkTitle,homeworkContent)values(#{studentId},#{homeworkId},#{homeworkTitle},#{homeworkContent})
+  </insert>
+  <update id="resubmitHomework">
+        update s_student_homework set homeworkContent=#{homeworkContent},updateTime=DATE_FORMAT(NOW(),'%Y-%m-%d %H:%m:%s') where studentId=#{studentId} and homeworkId=#{homeworkId} and homeworkTitle=#{homeworkTitle}
+  </update>
+  <select id="selectAll" resultType="StudentHomework">
+        SELECT * FROM s_student_homework
+  </select>
+
+</mapper>

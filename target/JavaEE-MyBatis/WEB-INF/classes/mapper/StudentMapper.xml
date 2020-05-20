@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.StudentMapper">
+  <resultMap id="student" type="Student">
+    <id property="id" column="id"></id>
+    <result property="name" column="name"></result>
+    <result property="createTime" column="createTime"></result>
+    <result property="updateTime" column="updateTime"></result>
+  </resultMap>
+  <insert id="addStudent"  parameterType="Student">
+        insert into s_student(name)values(#{name})
+    </insert>
+  <update id="modifyStudent">
+        update s_student set name=#{name},update_time=DATE_FORMAT(NOW(),'%Y-%m-%d %H:%m:%s') where id=#{id}
+   </update>
+
+</mapper>
